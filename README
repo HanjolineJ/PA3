@@ -1,0 +1,16 @@
+python3 matrix_multi_no_threads.py
+
+python3 matrix_multi_threads.py
+
+
+gcc -o matrix_no_threads matrix_multi_no_threads.c -O2
+./matrix_no_threads
+
+
+gcc -o matrix_pthreads matrix_multi_pthreads.c -pthread -O2
+./matrix_pthreads
+
+
+brew install gcc  # Ensure GCC is installed
+gcc-14 -o matrix_openmp matrix_multi_openmp.c -fopenmp -O2
+./matrix_openmp
