@@ -1,10 +1,14 @@
+import random
+import time
+
+def generate_random_matrix(rows, cols):
+    """Generate a rows x cols matrix with random integers."""
+    return [[random.randint(0, 9) for _ in range(cols)] for _ in range(rows)]
+
 def matrix_multiplication(A, B):
     """
     Perform matrix multiplication between two matrices A and B.
-
-    :param A: List of lists representing matrix A
-    :param B: List of lists representing matrix B
-    :return: Resultant matrix after multiplication
+    A is rows_A x cols_A, B is rows_B x cols_B
     """
     rows_A = len(A)
     cols_A = len(A[0])
@@ -14,7 +18,6 @@ def matrix_multiplication(A, B):
     if cols_A != rows_B:
         raise ValueError("Number of columns in A must be equal to number of rows in B")
 
-    # Initialize the resultant matrix with zeros
     result = [[0 for _ in range(cols_B)] for _ in range(rows_A)]
 
     # Perform matrix multiplication
@@ -26,29 +29,15 @@ def matrix_multiplication(A, B):
     return result
 
 if __name__ == "__main__":
-    # Sample matrices for multiplication
-    A = [
-        [1, 2, 3],
-        [4, 5, 6],
-        [7, 8, 9]
-    ]
-    B = [
-        [9, 8, 7],
-        [6, 5, 4],
-        [3, 2, 1]
-    ]
+    sizes = [10, 50, 100, 500]
 
-    print("Matrix A:")
-    for row in A:
-        print(row)
-    
-    print("\nMatrix B:")
-    for row in B:
-        print(row)
+    for size in sizes:
+        # Generate random matrices A and B, each of dimension (size x size)
+        A = generate_random_matrix(size, size)
+        B = generate_random_matrix(size, size)
 
-    # Perform multiplication
-    result = matrix_multiplication(A, B)
+        start_time = time.time()
+        _ = matrix_multiplication(A, B)
+        end_time = time.time()
 
-    print("\nResultant Matrix:")
-    for row in result:
-        print(row)
+        print(f"Python (no threads), size={size} => {end_time - start_time:.4f} sec")
