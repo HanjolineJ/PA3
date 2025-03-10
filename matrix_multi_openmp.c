@@ -1,12 +1,36 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
-void matrix_multi_omp(int **A, int **B, int **C, int rows_A, int cols_A, int cols_B) {
+#ifdef _OPENMP
+#include <omp.h>
+#endif
+
+int** generate_random_matrix(int rows, int cols) {
+    int** mat = (int**)malloc(rows * sizeof(int*));
+    for(int i = 0; i < rows; i++) {
+        mat[i] = (int*)malloc(cols * sizeof(int));
+        for(int j = 0; j < cols; j++) {
+            mat[i][j] = rand() % 10;
+        }
+    }
+    return mat;
+}
+
+void free_matrix(int** mat, int rows) {
+    for(int i = 0; i < rows; i++) {
+        free(mat[i]);
+    }
+    free(mat);
+}
+
+void matrix_multi_omp(int **A, int **B, int **C, int size) {
+    // Parallelize the outer two loops
     #pragma omp parallel for collapse(2)
-    for (int i = 0; i < rows_A; i++) {
-        for (int j = 0; j < cols_B; j++) {
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
             C[i][j] = 0;
-            for (int k = 0; k < cols_A; k++) {
+            for (int k = 0; k < size; k++) {
                 C[i][j] += A[i][k] * B[k][j];
             }
         }
@@ -14,71 +38,32 @@ void matrix_multi_omp(int **A, int **B, int **C, int rows_A, int cols_A, int col
 }
 
 int main() {
-    int rows_A = 3, cols_A = 3, rows_B = 3, cols_B = 3;
+    srand((unsigned)time(NULL));
 
-    // Allocate memory for matrices
-    int** A = (int**)malloc(rows_A * sizeof(int*));
-    int** B = (int**)malloc(rows_B * sizeof(int*));
-    int** C = (int**)malloc(rows_A * sizeof(int*));
-    for (int i = 0; i < rows_A; i++) {
-        A[i] = (int*)malloc(cols_A * sizeof(int));
-        C[i] = (int*)malloc(cols_B * sizeof(int));
-    }
-    for (int i = 0; i < rows_B; i++) {
-        B[i] = (int*)malloc(cols_B * sizeof(int));
-    }
+    int sizes[] = {10, 50, 100, 500};
+    int num_sizes = sizeof(sizes)/sizeof(sizes[0]);
 
-    // Initialize matrices A and B with sample values
-    int sample_A[3][3] = { {1, 2, 3}, {4, 5, 6}, {7, 8, 9} };
-    int sample_B[3][3] = { {9, 8, 7}, {6, 5, 4}, {3, 2, 1} };
-    for (int i = 0; i < rows_A; i++) {
-        for (int j = 0; j < cols_A; j++) {
-            A[i][j] = sample_A[i][j];
-            B[i][j] = sample_B[i][j];
-        }
-    }
+    for(int s = 0; s < num_sizes; s++) {
+        int size = sizes[s];
 
-    // Perform matrix multiplication using OpenMP
-    matrix_multi_omp(A, B, C, rows_A, cols_A, cols_B);
+        int** A = generate_random_matrix(size, size);
+        int** B = generate_random_matrix(size, size);
+        int** C = generate_random_matrix(size, size); // to store the result
 
-    // Print matrix A
-    printf("Matrix A:\n");
-    for (int i = 0; i < rows_A; i++) {
-        for (int j = 0; j < cols_A; j++) {
-            printf("%d ", A[i][j]);
-        }
-        printf("\n");
-    }
+        // Record time
+        clock_t start = clock();
+        // Or optionally use double start_omp = omp_get_wtime(); if you want better resolution.
 
-    // Print matrix B
-    printf("\nMatrix B:\n");
-    for (int i = 0; i < rows_B; i++) {
-        for (int j = 0; j < cols_B; j++) {
-            printf("%d ", B[i][j]);
-        }
-        printf("\n");
-    }
+        matrix_multi_omp(A, B, C, size);
 
-    // Print result matrix
-    printf("\nResultant Matrix C:\n");
-    for (int i = 0; i < rows_A; i++) {
-        for (int j = 0; j < cols_B; j++) {
-            printf("%d ", C[i][j]);
-        }
-        printf("\n");
-    }
+        clock_t end = clock();
+        double elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+        printf("C (OpenMP), size=%d => %.4f sec\n", size, elapsed);
 
-    // Free allocated memory
-    for (int i = 0; i < rows_A; i++) {
-        free(A[i]);
-        free(C[i]);
+        free_matrix(A, size);
+        free_matrix(B, size);
+        free_matrix(C, size);
     }
-    for (int i = 0; i < rows_B; i++) {
-        free(B[i]);
-    }
-    free(A);
-    free(B);
-    free(C);
 
     return 0;
 }

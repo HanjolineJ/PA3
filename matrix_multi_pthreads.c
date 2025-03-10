@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <time.h>
 
 typedef struct {
     int row;
@@ -8,107 +9,86 @@ typedef struct {
     int **A;
     int **B;
     int **C;
-    int cols_A;
+    int size;  // both dimension of A and B
 } thread_data;
 
-void *calculate_element(void *args) {
-    thread_data *data = (thread_data *)args;
+int** generate_random_matrix(int rows, int cols) {
+    int** mat = (int**)malloc(rows * sizeof(int*));
+    for(int i = 0; i < rows; i++) {
+        mat[i] = (int*)malloc(cols * sizeof(int));
+        for(int j = 0; j < cols; j++) {
+            mat[i][j] = rand() % 10;
+        }
+    }
+    return mat;
+}
+
+void free_matrix(int** mat, int rows) {
+    for(int i = 0; i < rows; i++) {
+        free(mat[i]);
+    }
+    free(mat);
+}
+
+void* calculate_element(void* args) {
+    thread_data* data = (thread_data*)args;
     int sum = 0;
-    for (int k = 0; k < data->cols_A; k++) {
+    for (int k = 0; k < data->size; k++) {
         sum += data->A[data->row][k] * data->B[k][data->col];
     }
     data->C[data->row][data->col] = sum;
-    free(data);
+    free(data); // free our thread_data struct
     pthread_exit(NULL);
 }
 
 int main() {
-    int rows_A = 3, cols_A = 3, rows_B = 3, cols_B = 3;
+    srand((unsigned)time(NULL));
 
-    // Allocate memory for matrices
-    int** A = (int**)malloc(rows_A * sizeof(int*));
-    int** B = (int**)malloc(rows_B * sizeof(int*));
-    int** C = (int**)malloc(rows_A * sizeof(int*));
-    for (int i = 0; i < rows_A; i++) {
-        A[i] = (int*)malloc(cols_A * sizeof(int));
-        C[i] = (int*)malloc(cols_B * sizeof(int));
-    }
-    for (int i = 0; i < rows_B; i++) {
-        B[i] = (int*)malloc(cols_B * sizeof(int));
-    }
+    int sizes[] = {10, 50, 100, 500};
+    int num_sizes = sizeof(sizes)/sizeof(sizes[0]);
 
-    // Initialize matrices A and B with sample values
-    int sample_A[3][3] = { {1, 2, 3}, {4, 5, 6}, {7, 8, 9} };
-    int sample_B[3][3] = { {9, 8, 7}, {6, 5, 4}, {3, 2, 1} };
-    for (int i = 0; i < rows_A; i++) {
-        for (int j = 0; j < cols_A; j++) {
-            A[i][j] = sample_A[i][j];
-            B[i][j] = sample_B[i][j];
+    for(int s = 0; s < num_sizes; s++) {
+        int size = sizes[s];
+
+        int** A = generate_random_matrix(size, size);
+        int** B = generate_random_matrix(size, size);
+        int** C = generate_random_matrix(size, size); // to store the result
+
+        int thread_count = size * size;
+        pthread_t* threads = (pthread_t*)malloc(thread_count * sizeof(pthread_t));
+
+        clock_t start = clock();
+
+        // Create a thread for each element C[i][j]
+        int thread_index = 0;
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                thread_data* data = (thread_data*)malloc(sizeof(thread_data));
+                data->row = i;
+                data->col = j;
+                data->A = A;
+                data->B = B;
+                data->C = C;
+                data->size = size;
+                pthread_create(&threads[thread_index], NULL, calculate_element, (void*)data);
+                thread_index++;
+            }
         }
-    }
-
-    int thread_count = rows_A * cols_B;
-    pthread_t threads[thread_count];
-    int thread_index = 0;
-
-    // Create threads for each element in the result matrix
-    for (int i = 0; i < rows_A; i++) {
-        for (int j = 0; j < cols_B; j++) {
-            thread_data *data = (thread_data *)malloc(sizeof(thread_data));
-            data->row = i;
-            data->col = j;
-            data->A = A;
-            data->B = B;
-            data->C = C;
-            data->cols_A = cols_A;
-            pthread_create(&threads[thread_index], NULL, calculate_element, (void *)data);
-            thread_index++;
+        // Wait for all threads
+        for(int i = 0; i < thread_count; i++) {
+            pthread_join(threads[i], NULL);
         }
-    }
 
-    // Wait for all threads to complete
-    for (int i = 0; i < thread_count; i++) {
-        pthread_join(threads[i], NULL);
-    }
+        clock_t end = clock();
+        double elapsed = (double)(end - start) / CLOCKS_PER_SEC;
 
-    // Print matrix A
-    printf("Matrix A:\n");
-    for (int i = 0; i < rows_A; i++) {
-        for (int j = 0; j < cols_A; j++) {
-            printf("%d ", A[i][j]);
-        }
-        printf("\n");
-    }
+        printf("C (POSIX threads), size=%d => %.4f sec\n", size, elapsed);
 
-    // Print matrix B
-    printf("\nMatrix B:\n");
-    for (int i = 0; i < rows_B; i++) {
-        for (int j = 0; j < cols_B; j++) {
-            printf("%d ", B[i][j]);
-        }
-        printf("\n");
+        free(threads);
+        free_matrix(A, size);
+        free_matrix(B, size);
+        free_matrix(C, size);
     }
-
-    // Print result matrix
-    printf("\nResultant Matrix C:\n");
-    for (int i = 0; i < rows_A; i++) {
-        for (int j = 0; j < cols_B; j++) {
-            printf("%d ", C[i][j]);
-        }
-        printf("\n");
-    }
-
-    // Free allocated memory
-    for (int i = 0; i < rows_A; i++) {
-        free(A[i]);
-        free(C[i]);
-    }
-    for (int i = 0; i < rows_B; i++) {
-        free(B[i]);
-    }
-    free(A);
-    free(B);
-    free(C);
 
     return 0;
 }
