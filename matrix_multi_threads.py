@@ -53,7 +53,7 @@ if __name__ == "__main__":
 
     result = matrix_multi_threads(A, B, num_workers=2)
 
-    print("\nProof of Correctness - Matrix Multiplication (3x3 ones matrix):")
+    print("\n Matrix Multiplication:")
     for row in result:
         print(row)
 

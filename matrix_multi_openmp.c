@@ -119,7 +119,7 @@ int main() {
     matrix_multi_omp(A, B, C, size);
 
     // Print Resultant Matrix
-    printf("\nProof of Correctness - Matrix Multiplication (3x3 ones matrix):\n");
+    printf("\nMatrix Multiplication):\n");
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
             printf("%d ", C[i][j]);

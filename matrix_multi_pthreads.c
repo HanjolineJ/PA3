@@ -79,7 +79,7 @@ void multiply_matrix_with_threads(int size, int num_threads, int is_proof) {
     int **A, **B;
 
     if (is_proof) {
-        printf("\n--- Proof of Correctness ---\n");
+        printf("\n--- Matrix Multiplication ---\n");
         A = generate_ones_matrix(size, size);
         B = generate_ones_matrix(size, size);
     } else {
@@ -129,11 +129,7 @@ void multiply_matrix_with_threads(int size, int num_threads, int is_proof) {
     printf("C (Threads=%d), Matrix Size=%d => %.6f sec\n", num_threads, size, elapsed_time);
 
     if (is_proof) {
-        printf("Matrix A:\n");
-        print_matrix(A, size);
-        printf("Matrix B:\n");
-        print_matrix(B, size);
-        printf("Resultant Matrix C:\n");
+        printf("Result Matrix :\n");
         print_matrix(C, size);
     }
 
