@@ -15,12 +15,27 @@ def matrix_multiplication(A, B):
     for i in range(rows_A):
         for j in range(cols_B):
             for k in range(cols_A):
-                result[i][j] += A[i][k] * B[k][j]
+                result[i][j] += A[i][k] * B[k][j]  # Restore normal multiplication
 
     return result
 
+def generate_ones_matrix(size):
+    return [[1 for _ in range(size)] for _ in range(size)]
+
 if __name__ == "__main__":
-    sizes = [10, 50, 100, 500]
+    size = 3  # Small matrix for correctness proof
+    A = generate_ones_matrix(size)
+    B = generate_ones_matrix(size)
+
+    result = matrix_multiplication(A, B)
+
+    print("\nResult Matrix:")
+    for row in result:
+        print(row)
+
+
+if __name__ == "__main__":
+    sizes = [10, 50, 100, 500, 1000, 1200, 1500] 
 
     for size in sizes:
         A, B = generate_random_matrix(size, size), generate_random_matrix(size, size)

@@ -58,74 +58,47 @@ void* multiply_rows(void* arg) {
 }
 
 int main() {
-    srand((unsigned)time(NULL));
+    int size = 3; // Small matrix for correctness proof
 
-    int num_cores = sysconf(_SC_NPROCESSORS_ONLN);
-    printf("System has %d CPU cores.\n", num_cores);
+    int **A = generate_ones_matrix(size);
+    int **B = generate_ones_matrix(size);
+    int **C = generate_ones_matrix(size);
 
-    int sizes[] = {10, 50, 100, 500};
-    int num_sizes = sizeof(sizes) / sizeof(sizes[0]);
+    int num_threads = 2;  // Using 2 threads for correctness proof
 
-    for (int s = 0; s < num_sizes; s++) {
-        int size = sizes[s];
+    pthread_t threads[num_threads];
 
-        int** A = generate_random_matrix(size, size);
-        int** B = generate_random_matrix(size, size);
-        int** C = generate_random_matrix(size, size); // to store the result
+    int rows_per_thread = size / num_threads;
+    int remainder = size % num_threads;
 
-        for (int t = 0; t < 4; t++) {
-            int num_threads = thread_experiments[t];
-            pthread_t threads[num_threads];
+    int row_start = 0;
+    for (int i = 0; i < num_threads; i++) {
+        int chunk_size = rows_per_thread + (remainder > 0 ? 1 : 0);
+        remainder = remainder > 0 ? remainder - 1 : 0;
+        int row_end = row_start + chunk_size;
 
-            // Adjust thread workload accordingly
-            int rows_per_thread = size / num_threads;
-            int remainder = size % num_threads;
+        thread_data* data = (thread_data*)malloc(sizeof(thread_data));
+        data->row_start = row_start;
+        data->row_end = row_end;
+        data->A = A;
+        data->B = B;
+        data->C = C;
+        data->size = size;
 
-            printf("Running with %d threads...\n", num_threads);
+        pthread_create(&threads[i], NULL, multiply_rows, (void*)data);
 
-            clock_t start = clock();
-
-            int row_start = 0;
-            for (int i = 0; i < num_threads; i++) {
-                // Each thread can get either rows_per_thread or (rows_per_thread + 1)
-                int chunk_size = rows_per_thread + (remainder > 0 ? 1 : 0);
-                remainder = remainder > 0 ? remainder - 1 : 0;
-
-                int row_end = row_start + chunk_size;
-                if (row_start >= size) {
-                    // No more rows left — spawn no thread
-                    break;
-                }
-
-                // Allocate data struct for this thread
-                thread_data* data = (thread_data*)malloc(sizeof(thread_data));
-                data->row_start = row_start;
-                data->row_end = row_end; // up to but not including row_end
-                data->A = A;
-                data->B = B;
-                data->C = C;
-                data->size = size;
-
-                pthread_create(&threads[i], NULL, multiply_rows, (void*)data);
-
-                row_start = row_end; // Next thread starts where this one left off
-            }
-
-            // Join all threads
-            for (int i = 0; i < num_threads; i++) {
-                pthread_join(threads[i], NULL);
-            }
-
-            clock_t end = clock();
-            double elapsed = (double)(end - start) / CLOCKS_PER_SEC;
-
-            printf("C (POSIX thread pool=%d), size=%d => %.4f sec\n", num_threads, size, elapsed);
-        }
-
-        free_matrix(A, size);
-        free_matrix(B, size);
-        free_matrix(C, size);
+        row_start = row_end;
     }
 
-    return 0;
+    for (int i = 0; i < num_threads; i++) {
+        pthread_join(threads[i], NULL);
+    }
+
+    printf("\nResultant Matrix:\n");
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            printf("%d ", C[i][j]);
+        }
+        printf("\n");
+    }
 }

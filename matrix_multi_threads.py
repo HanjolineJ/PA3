@@ -3,9 +3,15 @@ import time
 import concurrent.futures
 import os
 
+# Function to generate a random matrix
 def generate_random_matrix(rows, cols):
     return [[random.randint(0, 9) for _ in range(cols)] for _ in range(rows)]
 
+# Function to generate a matrix filled with 1's (for correctness proof)
+def generate_ones_matrix(size):
+    return [[1 for _ in range(size)] for _ in range(size)]
+
+# Function to multiply a section of rows in A with B
 def _multiply_rows(A, B, result, row_start, row_end):
     for i in range(row_start, row_end):
         for j in range(len(B[0])):
@@ -14,6 +20,7 @@ def _multiply_rows(A, B, result, row_start, row_end):
                 total += A[i][k] * B[k][j]
             result[i][j] = total
 
+# Function to perform matrix multiplication using threads
 def matrix_multi_threads(A, B, num_workers):
     result = [[0] * len(B[0]) for _ in range(len(A))]
     chunk_size = len(A) // num_workers
@@ -38,30 +45,28 @@ def matrix_multi_threads(A, B, num_workers):
 
     return result
 
-from multiprocessing import Pool, cpu_count
-
-def matrix_multiplication_parallel(args):
-    A, B, row = args
-    size = len(A)
-    result_row = [sum(A[row][k] * B[k][j] for k in range(size)) for j in range(size)]
-    return result_row
-
-def matrix_multi_processes(A, B, num_workers):
-    size = len(A)
-    with Pool(processes=num_workers) as pool:
-        result = pool.map(matrix_multiplication_parallel, [(A, B, i) for i in range(size)])
-    return result
-
 if __name__ == "__main__":
-    sizes = [10, 50, 100, 500]
-    thread_experiments = [3, 7, 9, 2]
+    # **Proof of Correctness: Small Matrix (3x3) with Ones**
+    size = 3
+    A = generate_ones_matrix(size)
+    B = generate_ones_matrix(size)
+
+    result = matrix_multi_threads(A, B, num_workers=2)
+
+    print("\nProof of Correctness - Matrix Multiplication (3x3 ones matrix):")
+    for row in result:
+        print(row)
+
+    # **Performance Testing with Larger Matrices**
+    sizes = [10, 50, 100, 500, 1000, 1200, 1500]  # Matrix sizes to test
+    thread_experiments = [3, 7, 9, 2]  # Different thread counts to test
 
     for size in sizes:
         A, B = generate_random_matrix(size, size), generate_random_matrix(size, size)
 
         for threads in thread_experiments:
             start_time = time.time()
-            _ = matrix_multi_processes(A, B, num_workers=threads)
+            _ = matrix_multi_threads(A, B, num_workers=threads)
             end_time = time.time()
 
-            print(f"Python (Processes={threads}), size={size} => {end_time - start_time:.4f} sec")
+            print(f"Python (Threads={threads}), size={size} => {end_time - start_time:.4f} sec")
