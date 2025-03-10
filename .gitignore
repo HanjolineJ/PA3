@@ -1,3 +1,6 @@
 # Ignore OS-generated files
 .DS_Store
 Thumbs.db
+# Ignore OS-generated files
+.DS_Store
+Thumbs.db
