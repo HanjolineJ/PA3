@@ -38,6 +38,20 @@ def matrix_multi_threads(A, B, num_workers):
 
     return result
 
+from multiprocessing import Pool, cpu_count
+
+def matrix_multiplication_parallel(args):
+    A, B, row = args
+    size = len(A)
+    result_row = [sum(A[row][k] * B[k][j] for k in range(size)) for j in range(size)]
+    return result_row
+
+def matrix_multi_processes(A, B, num_workers):
+    size = len(A)
+    with Pool(processes=num_workers) as pool:
+        result = pool.map(matrix_multiplication_parallel, [(A, B, i) for i in range(size)])
+    return result
+
 if __name__ == "__main__":
     sizes = [10, 50, 100, 500]
     thread_experiments = [3, 7, 9, 2]
@@ -47,7 +61,7 @@ if __name__ == "__main__":
 
         for threads in thread_experiments:
             start_time = time.time()
-            _ = matrix_multi_threads(A, B, num_workers=threads)
+            _ = matrix_multi_processes(A, B, num_workers=threads)
             end_time = time.time()
 
-            print(f"Python (Threads={threads}), size={size} => {end_time - start_time:.4f} sec")
+            print(f"Python (Processes={threads}), size={size} => {end_time - start_time:.4f} sec")

@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 
 #ifdef _OPENMP
 #include <omp.h>
 #endif
+
 
 void matrix_multi_omp(int **A, int **B, int **C, int size) {
     #pragma omp parallel for collapse(2)
@@ -20,7 +22,9 @@ void matrix_multi_omp(int **A, int **B, int **C, int size) {
 
 int main() {
     srand(time(NULL));
-    int sizes[] = {10, 50, 100, 500};
+    omp_set_num_threads(sysconf(_SC_NPROCESSORS_ONLN));
+    srand(time(NULL));
+    int sizes[] = {100, 200, 300, 400}; // Define the sizes array
     int thread_experiments[] = {3, 7, 9, 2};
 
     for (int s = 0; s < 4; s++) {
