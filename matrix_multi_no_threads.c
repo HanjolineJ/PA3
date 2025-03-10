@@ -22,6 +22,17 @@ void free_matrix(int** mat, int size) {
     free(mat);
 }
 
+// Function to print a matrix
+void print_matrix(int** mat, int size) {
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            printf("%d ", mat[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
 // Function to perform matrix multiplication
 void matrix_multiplication(int** A, int** B, int** C, int size) {
     for (int i = 0; i < size; i++) {
@@ -38,7 +49,7 @@ int main() {
     srand(time(NULL)); // Seed for random number generation
 
     // Matrix sizes to test
-    int sizes[] = {10, 50, 100, 500, 1000, 1200, 1500};  
+    int sizes[] = {3, 10, 50, 100, 500, 1000, 1200, 1500};  
     int num_sizes = sizeof(sizes) / sizeof(sizes[0]);
 
     for(int s = 0; s < num_sizes; s++) {
@@ -59,6 +70,16 @@ int main() {
 
         double elapsed_time = (double)(end - start) / CLOCKS_PER_SEC;
         printf("C (No Threads), size=%d => %.4f sec\n", size, elapsed_time);
+
+        // Print matrices only for small sizes
+        if (size == 3) {
+            printf("\nMatrix A:\n");
+            print_matrix(A, size);
+            printf("Matrix B:\n");
+            print_matrix(B, size);
+            printf("Resultant Matrix C:\n");
+            print_matrix(C, size);
+        }
 
         // Free allocated memory
         free_matrix(A, size);
