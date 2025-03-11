@@ -14,3 +14,7 @@ gcc -o matrix_pthreads matrix_multi_pthreads.c -pthread -O2
 brew install gcc  # Ensure GCC is installed
 gcc-14 -o matrix_openmp matrix_multi_openmp.c -fopenmp -O2
 ./matrix_openmp
+
+
+chmod +x run_tests.sh
+./run_tests.sh

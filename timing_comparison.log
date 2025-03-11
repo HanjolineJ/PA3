@@ -4,89 +4,79 @@ Running C (No Threads)...
 C (No Threads), size=3 => 0.0000 sec
 
 Matrix A:
-7 0 2 
-1 6 0 
-4 6 8 
+5 0 6 
+3 5 8 
+8 3 7 
 
 Matrix B:
-7 6 8 
-3 2 7 
-0 6 6 
+8 0 4 
+1 5 7 
+5 6 5 
 
 Resultant Matrix C:
-49 54 68 
-25 18 50 
-46 84 122 
+70 36 50 
+69 73 87 
+102 57 88 
 
 C (No Threads), size=10 => 0.0000 sec
-C (No Threads), size=50 => 0.0000 sec
-C (No Threads), size=100 => 0.0005 sec
-C (No Threads), size=500 => 0.0838 sec
-C (No Threads), size=1000 => 0.8110 sec
-C (No Threads), size=1200 => 1.0312 sec
-C (No Threads), size=1500 => 2.1228 sec
+C (No Threads), size=50 => 0.0001 sec
+C (No Threads), size=100 => 0.0006 sec
+C (No Threads), size=500 => 0.0829 sec
+C (No Threads), size=1000 => 0.8670 sec
+C (No Threads), size=1200 => 1.0016 sec
+C (No Threads), size=1500 => 2.0805 sec
 
 Running C (PThreads)...
 
---- Proof of Correctness ---
-C (Threads=2), Matrix Size=3 => 0.000032 sec
-Matrix A:
-1 1 1 
-1 1 1 
-1 1 1 
-
-Matrix B:
-1 1 1 
-1 1 1 
-1 1 1 
-
-Resultant Matrix C:
+--- Matrix Multiplication ---
+C (Threads=2), Matrix Size=3 => 0.000047 sec
+Result Matrix :
 3 3 3 
 3 3 3 
 3 3 3 
 
-C (Threads=1), Matrix Size=10 => 0.000024 sec
-C (Threads=2), Matrix Size=10 => 0.000029 sec
-C (Threads=4), Matrix Size=10 => 0.000047 sec
-C (Threads=8), Matrix Size=10 => 0.000113 sec
-C (Threads=12), Matrix Size=10 => 0.000163 sec
-C (Threads=16), Matrix Size=10 => 0.000207 sec
+C (Threads=1), Matrix Size=10 => 0.000033 sec
+C (Threads=2), Matrix Size=10 => 0.000036 sec
+C (Threads=4), Matrix Size=10 => 0.000061 sec
+C (Threads=8), Matrix Size=10 => 0.000105 sec
+C (Threads=12), Matrix Size=10 => 0.000157 sec
+C (Threads=16), Matrix Size=10 => 0.000202 sec
 C (Threads=1), Matrix Size=50 => 0.000091 sec
-C (Threads=2), Matrix Size=50 => 0.000069 sec
-C (Threads=4), Matrix Size=50 => 0.000068 sec
-C (Threads=8), Matrix Size=50 => 0.000120 sec
-C (Threads=12), Matrix Size=50 => 0.000146 sec
-C (Threads=16), Matrix Size=50 => 0.000196 sec
-C (Threads=1), Matrix Size=100 => 0.000570 sec
-C (Threads=2), Matrix Size=100 => 0.000305 sec
-C (Threads=4), Matrix Size=100 => 0.000193 sec
-C (Threads=8), Matrix Size=100 => 0.000154 sec
-C (Threads=12), Matrix Size=100 => 0.000179 sec
-C (Threads=16), Matrix Size=100 => 0.000189 sec
-C (Threads=1), Matrix Size=500 => 0.079313 sec
-C (Threads=2), Matrix Size=500 => 0.036436 sec
-C (Threads=4), Matrix Size=500 => 0.021379 sec
-C (Threads=8), Matrix Size=500 => 0.015402 sec
-C (Threads=12), Matrix Size=500 => 0.017302 sec
-C (Threads=16), Matrix Size=500 => 0.016331 sec
-C (Threads=1), Matrix Size=1000 => 0.823681 sec
-C (Threads=2), Matrix Size=1000 => 0.452573 sec
-C (Threads=4), Matrix Size=1000 => 0.294232 sec
-C (Threads=8), Matrix Size=1000 => 0.209094 sec
-C (Threads=12), Matrix Size=1000 => 0.211401 sec
-C (Threads=16), Matrix Size=1000 => 0.215930 sec
-C (Threads=1), Matrix Size=1200 => 0.921490 sec
-C (Threads=2), Matrix Size=1200 => 0.466713 sec
-C (Threads=4), Matrix Size=1200 => 0.247381 sec
-C (Threads=8), Matrix Size=1200 => 0.188080 sec
-C (Threads=12), Matrix Size=1200 => 0.184358 sec
-C (Threads=16), Matrix Size=1200 => 0.182870 sec
-C (Threads=1), Matrix Size=1500 => 1.833168 sec
-C (Threads=2), Matrix Size=1500 => 1.006377 sec
-C (Threads=4), Matrix Size=1500 => 0.527034 sec
-C (Threads=8), Matrix Size=1500 => 0.399253 sec
-C (Threads=12), Matrix Size=1500 => 0.394907 sec
-C (Threads=16), Matrix Size=1500 => 0.397822 sec
+C (Threads=2), Matrix Size=50 => 0.000067 sec
+C (Threads=4), Matrix Size=50 => 0.000067 sec
+C (Threads=8), Matrix Size=50 => 0.000125 sec
+C (Threads=12), Matrix Size=50 => 0.000147 sec
+C (Threads=16), Matrix Size=50 => 0.000194 sec
+C (Threads=1), Matrix Size=100 => 0.000556 sec
+C (Threads=2), Matrix Size=100 => 0.000298 sec
+C (Threads=4), Matrix Size=100 => 0.000180 sec
+C (Threads=8), Matrix Size=100 => 0.000204 sec
+C (Threads=12), Matrix Size=100 => 0.000174 sec
+C (Threads=16), Matrix Size=100 => 0.000195 sec
+C (Threads=1), Matrix Size=500 => 0.078058 sec
+C (Threads=2), Matrix Size=500 => 0.034002 sec
+C (Threads=4), Matrix Size=500 => 0.027429 sec
+C (Threads=8), Matrix Size=500 => 0.015255 sec
+C (Threads=12), Matrix Size=500 => 0.016211 sec
+C (Threads=16), Matrix Size=500 => 0.015406 sec
+C (Threads=1), Matrix Size=1000 => 0.776620 sec
+C (Threads=2), Matrix Size=1000 => 0.424501 sec
+C (Threads=4), Matrix Size=1000 => 0.288471 sec
+C (Threads=8), Matrix Size=1000 => 0.213143 sec
+C (Threads=12), Matrix Size=1000 => 0.207450 sec
+C (Threads=16), Matrix Size=1000 => 0.201138 sec
+C (Threads=1), Matrix Size=1200 => 0.906872 sec
+C (Threads=2), Matrix Size=1200 => 0.469725 sec
+C (Threads=4), Matrix Size=1200 => 0.257191 sec
+C (Threads=8), Matrix Size=1200 => 0.195716 sec
+C (Threads=12), Matrix Size=1200 => 0.198149 sec
+C (Threads=16), Matrix Size=1200 => 0.190634 sec
+C (Threads=1), Matrix Size=1500 => 1.867688 sec
+C (Threads=2), Matrix Size=1500 => 1.137830 sec
+C (Threads=4), Matrix Size=1500 => 0.525886 sec
+C (Threads=8), Matrix Size=1500 => 0.489552 sec
+C (Threads=12), Matrix Size=1500 => 0.434456 sec
+C (Threads=16), Matrix Size=1500 => 0.431612 sec
 
 Running C (OpenMP)...
 OpenMP (Threads=3), size=10 => 0.0001 sec
@@ -98,27 +88,27 @@ OpenMP (Threads=7), size=50 => 0.0001 sec
 OpenMP (Threads=9), size=50 => 0.0001 sec
 OpenMP (Threads=2), size=50 => 0.0001 sec
 OpenMP (Threads=3), size=100 => 0.0002 sec
-OpenMP (Threads=7), size=100 => 0.0002 sec
+OpenMP (Threads=7), size=100 => 0.0003 sec
 OpenMP (Threads=9), size=100 => 0.0002 sec
 OpenMP (Threads=2), size=100 => 0.0004 sec
-OpenMP (Threads=3), size=500 => 0.0388 sec
-OpenMP (Threads=7), size=500 => 0.0180 sec
-OpenMP (Threads=9), size=500 => 0.0179 sec
-OpenMP (Threads=2), size=500 => 0.0383 sec
-OpenMP (Threads=3), size=1000 => 0.3275 sec
-OpenMP (Threads=7), size=1000 => 0.2154 sec
-OpenMP (Threads=9), size=1000 => 0.2139 sec
-OpenMP (Threads=2), size=1000 => 0.4548 sec
-OpenMP (Threads=3), size=1200 => 0.3586 sec
+OpenMP (Threads=3), size=500 => 0.0336 sec
+OpenMP (Threads=7), size=500 => 0.0210 sec
+OpenMP (Threads=9), size=500 => 0.0174 sec
+OpenMP (Threads=2), size=500 => 0.0379 sec
+OpenMP (Threads=3), size=1000 => 0.3145 sec
+OpenMP (Threads=7), size=1000 => 0.2266 sec
+OpenMP (Threads=9), size=1000 => 0.2175 sec
+OpenMP (Threads=2), size=1000 => 0.4955 sec
+OpenMP (Threads=3), size=1200 => 0.3538 sec
 OpenMP (Threads=7), size=1200 => 0.2211 sec
-OpenMP (Threads=9), size=1200 => 0.2220 sec
-OpenMP (Threads=2), size=1200 => 0.5244 sec
-OpenMP (Threads=3), size=1500 => 0.7635 sec
-OpenMP (Threads=7), size=1500 => 0.4883 sec
-OpenMP (Threads=9), size=1500 => 0.4867 sec
-OpenMP (Threads=2), size=1500 => 1.1881 sec
+OpenMP (Threads=9), size=1200 => 0.2223 sec
+OpenMP (Threads=2), size=1200 => 0.5192 sec
+OpenMP (Threads=3), size=1500 => 0.7491 sec
+OpenMP (Threads=7), size=1500 => 0.4866 sec
+OpenMP (Threads=9), size=1500 => 0.5139 sec
+OpenMP (Threads=2), size=1500 => 1.1209 sec
 
-Proof of Correctness - Matrix Multiplication (3x3 ones matrix):
+Matrix Multiplication):
 3 3 3 
 3 3 3 
 3 3 3 
@@ -130,11 +120,44 @@ Result Matrix:
 [3, 3, 3]
 [3, 3, 3]
 Python (No Threads), size=10 => 0.0000 sec
-Python (No Threads), size=50 => 0.0043 sec
-Python (No Threads), size=100 => 0.0349 sec
-Python (No Threads), size=500 => 5.2362 sec
-Python (No Threads), size=1000 => 43.1155 sec
-Python (No Threads), size=1200 => 74.3241 sec
-Python (No Threads), size=1500 => 149.4174 sec
+Python (No Threads), size=50 => 0.0044 sec
+Python (No Threads), size=100 => 0.0346 sec
+Python (No Threads), size=500 => 5.3068 sec
+Python (No Threads), size=1000 => 44.6754 sec
+Python (No Threads), size=1200 => 73.1255 sec
+Python (No Threads), size=1500 => 147.9886 sec
 
 Running Python (Threads)...
+
+ Matrix Multiplication:
+[3, 3, 3]
+[3, 3, 3]
+[3, 3, 3]
+Python (Threads=3), size=10 => 0.0001 sec
+Python (Threads=7), size=10 => 0.0002 sec
+Python (Threads=9), size=10 => 0.0002 sec
+Python (Threads=2), size=10 => 0.0001 sec
+Python (Threads=3), size=50 => 0.0033 sec
+Python (Threads=7), size=50 => 0.0034 sec
+Python (Threads=9), size=50 => 0.0035 sec
+Python (Threads=2), size=50 => 0.0033 sec
+Python (Threads=3), size=100 => 0.0257 sec
+Python (Threads=7), size=100 => 0.0258 sec
+Python (Threads=9), size=100 => 0.0262 sec
+Python (Threads=2), size=100 => 0.0259 sec
+Python (Threads=3), size=500 => 3.8212 sec
+Python (Threads=7), size=500 => 3.8027 sec
+Python (Threads=9), size=500 => 3.8151 sec
+Python (Threads=2), size=500 => 3.7868 sec
+Python (Threads=3), size=1000 => 31.6219 sec
+Python (Threads=7), size=1000 => 31.5907 sec
+Python (Threads=9), size=1000 => 31.6793 sec
+Python (Threads=2), size=1000 => 31.4824 sec
+Python (Threads=3), size=1200 => 57.0240 sec
+Python (Threads=7), size=1200 => 57.1889 sec
+Python (Threads=9), size=1200 => 57.2364 sec
+Python (Threads=2), size=1200 => 56.7927 sec
+Python (Threads=3), size=1500 => 125.8384 sec
+Python (Threads=7), size=1500 => 113.5639 sec
+Python (Threads=9), size=1500 => 144.2386 sec
+Python (Threads=2), size=1500 => 112.9691 sec
