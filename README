@@ -17,4 +17,4 @@ gcc-14 -o matrix_openmp matrix_multi_openmp.c -fopenmp -O2
 
 
 chmod +x run_tests.sh
-./run_tests.sh
+./run_tests_og.sh
