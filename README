@@ -1,3 +1,5 @@
+commands and order to run the code: 
+
 python3 matrix_multi_no_threads.py
 
 python3 matrix_multi_threads.py
@@ -18,3 +20,6 @@ gcc-14 -o matrix_openmp matrix_multi_openmp.c -fopenmp -O2
 
 chmod +x run_tests.sh
 ./run_tests_og.sh
+
+python3 TimeP.py 
+python3 TimeC.py
