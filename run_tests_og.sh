@@ -1,3 +1,5 @@
+#// Referenced Youtube and Chatgbt for coding assistance 
+
 #!/bin/bash
 
 # Output log file

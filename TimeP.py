@@ -1,3 +1,5 @@
+#// Referenced Youtube and Chatgbt for coding assistance 
+
 import re
 import matplotlib.pyplot as plt
 import numpy as np

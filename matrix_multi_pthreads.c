@@ -1,3 +1,5 @@
+// Referenced Youtube and Chatgbt for coding assistance 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>

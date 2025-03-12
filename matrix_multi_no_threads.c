@@ -1,3 +1,5 @@
+// Referenced Youtube and Chatgbt for coding assistance 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -14,7 +16,7 @@ int** generate_random_matrix(int size) {
     return mat;
 }
 
-// Function to free allocated memory
+// Function to free allocated memory by a matrix 
 void free_matrix(int** mat, int size) {
     for(int i = 0; i < size; i++) {
         free(mat[i]);
@@ -22,7 +24,7 @@ void free_matrix(int** mat, int size) {
     free(mat);
 }
 
-// Function to print a matrix
+// Print a matrix
 void print_matrix(int** mat, int size) {
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
@@ -33,7 +35,7 @@ void print_matrix(int** mat, int size) {
     printf("\n");
 }
 
-// Function to perform matrix multiplication
+// Matrix multiplication
 void matrix_multiplication(int** A, int** B, int** C, int size) {
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
@@ -46,7 +48,7 @@ void matrix_multiplication(int** A, int** B, int** C, int size) {
 }
 
 int main() {
-    srand(time(NULL)); // Seed for random number generation
+    srand(time(NULL)); // Random number generation
 
     // Matrix sizes to test
     int sizes[] = {3, 10, 50, 100, 500, 1000, 1200, 1500};  
@@ -77,7 +79,7 @@ int main() {
             print_matrix(A, size);
             printf("Matrix B:\n");
             print_matrix(B, size);
-            printf("Resultant Matrix C:\n");
+            printf("Result Matrix C:\n");
             print_matrix(C, size);
         }
 

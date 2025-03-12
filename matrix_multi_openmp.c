@@ -1,3 +1,5 @@
+// Referenced Youtube and Chatgbt for coding assistance 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -7,11 +9,11 @@
 #include <omp.h>
 #endif
 
-// Function to generate a random matrix
+// Generate a random matrix
 int** generate_random_matrix(int size) {
     int** mat = (int**)malloc(size * sizeof(int*));
-    for (int i = 0; i < size; i++) {
-        mat[i] = (int*)malloc(size * sizeof(int));
+    for (int i = 0; i < size; i++) { 
+        mat[i] = (int*)malloc(size * sizeof(int)); 
         for (int j = 0; j < size; j++) {
             mat[i][j] = rand() % 10; // Random values from 0 to 9
         }
@@ -19,7 +21,7 @@ int** generate_random_matrix(int size) {
     return mat;
 }
 
-// Function to generate a matrix filled with 1's
+// Generate a matrix filled with 1's
 int** generate_ones_matrix(int size) {
     int** mat = (int**)malloc(size * sizeof(int*));
     for (int i = 0; i < size; i++) {
@@ -31,7 +33,7 @@ int** generate_ones_matrix(int size) {
     return mat;
 }
 
-// Function to allocate a zero matrix
+// Zero matrix
 int** allocate_zero_matrix(int size) {
     int** mat = (int**)malloc(size * sizeof(int*));
     for (int i = 0; i < size; i++) {
@@ -40,7 +42,7 @@ int** allocate_zero_matrix(int size) {
     return mat;
 }
 
-// Function to free allocated memory
+// Free allocated memory
 void free_matrix(int** mat, int size) {
     for (int i = 0; i < size; i++) {
         free(mat[i]);
@@ -72,13 +74,13 @@ int main() {
     int num_sizes = sizeof(sizes) / sizeof(sizes[0]);
     int thread_experiments[] = {3, 7, 9, 2};
 
-    for (int s = 0; s < num_sizes; s++) {
+    for (int s = 0; s < num_sizes; s++) { 
         int size = sizes[s];
-        int **A = generate_random_matrix(size);
+        int **A = generate_random_matrix(size); 
         int **B = generate_random_matrix(size);
         int **C = allocate_zero_matrix(size);  // Properly allocating C as a zero matrix
 
-        for (int t = 0; t < 4; t++) {
+        for (int t = 0; t < 4; t++) { 
             int num_threads = thread_experiments[t];
 
             #ifdef _OPENMP
