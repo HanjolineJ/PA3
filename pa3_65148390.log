@@ -1,0 +1,327 @@
+/blue/csci301/hjulceus/PA3
+c0702a-s1.ufhpc
+Mon Apr 14 10:02:41 EDT 2025
+Running non-threaded executable:
+C (No Threads), size=3 => 0.0000 sec
+
+Matrix A:
+7 8 3 
+1 6 1 
+6 6 5 
+
+Matrix B:
+8 0 0 
+1 1 8 
+1 5 3 
+
+Result Matrix C:
+67 23 73 
+15 11 51 
+59 31 63 
+
+C (No Threads), size=10 => 0.0000 sec
+C (No Threads), size=50 => 0.0010 sec
+C (No Threads), size=100 => 0.0055 sec
+C (No Threads), size=500 => 0.6539 sec
+C (No Threads), size=1000 => 5.7815 sec
+C (No Threads), size=1200 => 10.7850 sec
+C (No Threads), size=1500 => 19.3846 sec
+Running OpenMP executable:
+OpenMP (Threads=3), size=10 => 0.0259 sec
+OpenMP (Threads=7), size=10 => 0.0043 sec
+OpenMP (Threads=9), size=10 => 0.0001 sec
+OpenMP (Threads=2), size=10 => 0.0000 sec
+OpenMP (Threads=3), size=50 => 0.0064 sec
+OpenMP (Threads=7), size=50 => 0.0007 sec
+OpenMP (Threads=9), size=50 => 0.0005 sec
+OpenMP (Threads=2), size=50 => 0.0005 sec
+OpenMP (Threads=3), size=100 => 0.0024 sec
+OpenMP (Threads=7), size=100 => 0.0037 sec
+OpenMP (Threads=9), size=100 => 0.0024 sec
+OpenMP (Threads=2), size=100 => 0.0029 sec
+OpenMP (Threads=3), size=500 => 0.2185 sec
+OpenMP (Threads=7), size=500 => 0.2205 sec
+OpenMP (Threads=9), size=500 => 0.1693 sec
+OpenMP (Threads=2), size=500 => 0.3233 sec
+OpenMP (Threads=3), size=1000 => 1.8261 sec
+OpenMP (Threads=7), size=1000 => 1.5106 sec
+OpenMP (Threads=9), size=1000 => 1.4245 sec
+OpenMP (Threads=2), size=1000 => 2.5893 sec
+OpenMP (Threads=3), size=1200 => 3.3109 sec
+OpenMP (Threads=7), size=1200 => 2.7354 sec
+OpenMP (Threads=9), size=1200 => 2.5346 sec
+OpenMP (Threads=2), size=1200 => 5.5890 sec
+OpenMP (Threads=3), size=1500 => 6.8473 sec
+OpenMP (Threads=7), size=1500 => 4.8527 sec
+OpenMP (Threads=9), size=1500 => 4.7950 sec
+OpenMP (Threads=2), size=1500 => 9.1023 sec
+
+Matrix Multiplication):
+3 3 3 
+3 3 3 
+3 3 3 
+Running pthreads executable:
+
+--- Matrix Multiplication ---
+C (Threads=2), Matrix Size=3 => 0.000434 sec
+Result Matrix :
+3 3 3 
+3 3 3 
+3 3 3 
+
+C (Threads=1), Matrix Size=10 => 0.000032 sec
+C (Threads=2), Matrix Size=10 => 0.000056 sec
+C (Threads=4), Matrix Size=10 => 0.000111 sec
+C (Threads=8), Matrix Size=10 => 0.000220 sec
+C (Threads=12), Matrix Size=10 => 0.000326 sec
+C (Threads=16), Matrix Size=10 => 0.000410 sec
+C (Threads=1), Matrix Size=50 => 0.000553 sec
+C (Threads=2), Matrix Size=50 => 0.000566 sec
+C (Threads=4), Matrix Size=50 => 0.000550 sec
+C (Threads=8), Matrix Size=50 => 0.000629 sec
+C (Threads=12), Matrix Size=50 => 0.000679 sec
+C (Threads=16), Matrix Size=50 => 0.000774 sec
+C (Threads=1), Matrix Size=100 => 0.003187 sec
+C (Threads=2), Matrix Size=100 => 0.002881 sec
+C (Threads=4), Matrix Size=100 => 0.002753 sec
+C (Threads=8), Matrix Size=100 => 0.002964 sec
+C (Threads=12), Matrix Size=100 => 0.003189 sec
+C (Threads=16), Matrix Size=100 => 0.004503 sec
+C (Threads=1), Matrix Size=500 => 0.341009 sec
+C (Threads=2), Matrix Size=500 => 0.210902 sec
+C (Threads=4), Matrix Size=500 => 0.149803 sec
+C (Threads=8), Matrix Size=500 => 0.193871 sec
+C (Threads=12), Matrix Size=500 => 0.101198 sec
+C (Threads=16), Matrix Size=500 => 0.118208 sec
+C (Threads=1), Matrix Size=1000 => 2.859766 sec
+C (Threads=2), Matrix Size=1000 => 1.549649 sec
+C (Threads=4), Matrix Size=1000 => 0.811960 sec
+C (Threads=8), Matrix Size=1000 => 0.824057 sec
+C (Threads=12), Matrix Size=1000 => 0.739543 sec
+C (Threads=16), Matrix Size=1000 => 0.736024 sec
+C (Threads=1), Matrix Size=1200 => 5.577711 sec
+C (Threads=2), Matrix Size=1200 => 2.887269 sec
+C (Threads=4), Matrix Size=1200 => 1.496712 sec
+C (Threads=8), Matrix Size=1200 => 1.394040 sec
+C (Threads=12), Matrix Size=1200 => 1.339538 sec
+C (Threads=16), Matrix Size=1200 => 1.307496 sec
+C (Threads=1), Matrix Size=1500 => 11.142509 sec
+C (Threads=2), Matrix Size=1500 => 5.244967 sec
+C (Threads=4), Matrix Size=1500 => 2.921137 sec
+C (Threads=8), Matrix Size=1500 => 2.789078 sec
+C (Threads=12), Matrix Size=1500 => 2.604924 sec
+C (Threads=16), Matrix Size=1500 => 2.573790 sec
+Running test suite:
+run_tests_og.sh: line 15: gcc-14: command not found
+
+Running C (No Threads)...
+C (No Threads), size=3 => 0.0000 sec
+
+Matrix A:
+0 2 2 
+3 2 3 
+8 0 0 
+
+Matrix B:
+9 7 0 
+2 6 0 
+1 1 4 
+
+Result Matrix C:
+6 14 8 
+34 36 12 
+72 56 0 
+
+C (No Threads), size=10 => 0.0000 sec
+C (No Threads), size=50 => 0.0001 sec
+C (No Threads), size=100 => 0.0010 sec
+C (No Threads), size=500 => 0.1046 sec
+C (No Threads), size=1000 => 0.8668 sec
+C (No Threads), size=1200 => 1.4674 sec
+C (No Threads), size=1500 => 3.3148 sec
+
+Running C (PThreads)...
+
+--- Matrix Multiplication ---
+C (Threads=2), Matrix Size=3 => 0.000552 sec
+Result Matrix :
+3 3 3 
+3 3 3 
+3 3 3 
+
+C (Threads=1), Matrix Size=10 => 0.000027 sec
+C (Threads=2), Matrix Size=10 => 0.000054 sec
+C (Threads=4), Matrix Size=10 => 0.000101 sec
+C (Threads=8), Matrix Size=10 => 0.000219 sec
+C (Threads=12), Matrix Size=10 => 0.000278 sec
+C (Threads=16), Matrix Size=10 => 0.000363 sec
+C (Threads=1), Matrix Size=50 => 0.000188 sec
+C (Threads=2), Matrix Size=50 => 0.000172 sec
+C (Threads=4), Matrix Size=50 => 0.000213 sec
+C (Threads=8), Matrix Size=50 => 0.000286 sec
+C (Threads=12), Matrix Size=50 => 0.000359 sec
+C (Threads=16), Matrix Size=50 => 0.000394 sec
+C (Threads=1), Matrix Size=100 => 0.001252 sec
+C (Threads=2), Matrix Size=100 => 0.001267 sec
+C (Threads=4), Matrix Size=100 => 0.001254 sec
+C (Threads=8), Matrix Size=100 => 0.001083 sec
+C (Threads=12), Matrix Size=100 => 0.001275 sec
+C (Threads=16), Matrix Size=100 => 0.001231 sec
+C (Threads=1), Matrix Size=500 => 0.102335 sec
+C (Threads=2), Matrix Size=500 => 0.063867 sec
+C (Threads=4), Matrix Size=500 => 0.104184 sec
+C (Threads=8), Matrix Size=500 => 0.060159 sec
+C (Threads=12), Matrix Size=500 => 0.045815 sec
+C (Threads=16), Matrix Size=500 => 0.048153 sec
+C (Threads=1), Matrix Size=1000 => 0.838251 sec
+C (Threads=2), Matrix Size=1000 => 0.440930 sec
+C (Threads=4), Matrix Size=1000 => 0.357817 sec
+C (Threads=8), Matrix Size=1000 => 0.312687 sec
+C (Threads=12), Matrix Size=1000 => 0.274373 sec
+C (Threads=16), Matrix Size=1000 => 0.259202 sec
+C (Threads=1), Matrix Size=1200 => 1.461027 sec
+C (Threads=2), Matrix Size=1200 => 0.839453 sec
+C (Threads=4), Matrix Size=1200 => 0.622460 sec
+C (Threads=8), Matrix Size=1200 => 0.514454 sec
+C (Threads=12), Matrix Size=1200 => 0.435162 sec
+C (Threads=16), Matrix Size=1200 => 0.436214 sec
+C (Threads=1), Matrix Size=1500 => 3.284304 sec
+C (Threads=2), Matrix Size=1500 => 1.934343 sec
+C (Threads=4), Matrix Size=1500 => 1.085310 sec
+C (Threads=8), Matrix Size=1500 => 0.977707 sec
+C (Threads=12), Matrix Size=1500 => 0.916802 sec
+C (Threads=16), Matrix Size=1500 => 0.934322 sec
+
+Running C (OpenMP)...
+OpenMP (Threads=3), size=10 => 0.0117 sec
+OpenMP (Threads=7), size=10 => 0.0001 sec
+OpenMP (Threads=9), size=10 => 0.0001 sec
+OpenMP (Threads=2), size=10 => 0.0001 sec
+OpenMP (Threads=3), size=50 => 0.0004 sec
+OpenMP (Threads=7), size=50 => 0.0066 sec
+OpenMP (Threads=9), size=50 => 0.0004 sec
+OpenMP (Threads=2), size=50 => 0.0005 sec
+OpenMP (Threads=3), size=100 => 0.0169 sec
+OpenMP (Threads=7), size=100 => 0.0046 sec
+OpenMP (Threads=9), size=100 => 0.0036 sec
+OpenMP (Threads=2), size=100 => 0.0031 sec
+OpenMP (Threads=3), size=500 => 0.2229 sec
+OpenMP (Threads=7), size=500 => 0.2588 sec
+OpenMP (Threads=9), size=500 => 0.1993 sec
+OpenMP (Threads=2), size=500 => 0.3317 sec
+OpenMP (Threads=3), size=1000 => 1.7702 sec
+OpenMP (Threads=7), size=1000 => 1.4724 sec
+OpenMP (Threads=9), size=1000 => 1.4355 sec
+OpenMP (Threads=2), size=1000 => 2.6811 sec
+OpenMP (Threads=3), size=1200 => 3.2183 sec
+OpenMP (Threads=7), size=1200 => 2.6721 sec
+OpenMP (Threads=9), size=1200 => 2.5134 sec
+OpenMP (Threads=2), size=1200 => 4.8335 sec
+OpenMP (Threads=3), size=1500 => 6.1615 sec
+OpenMP (Threads=7), size=1500 => 5.0023 sec
+OpenMP (Threads=9), size=1500 => 4.7884 sec
+OpenMP (Threads=2), size=1500 => 9.5759 sec
+
+Matrix Multiplication):
+3 3 3 
+3 3 3 
+3 3 3 
+
+Running Python (No Threads)...
+
+Result Matrix:
+[3, 3, 3]
+[3, 3, 3]
+[3, 3, 3]
+Python (No Threads), size=10 => 0.0001 sec
+Python (No Threads), size=50 => 0.0098 sec
+Python (No Threads), size=100 => 0.0752 sec
+Python (No Threads), size=500 => 11.0007 sec
+Python (No Threads), size=1000 => 90.4297 sec
+Python (No Threads), size=1200 => 163.4003 sec
+Python (No Threads), size=1500 => 311.0053 sec
+
+Running Python (Threads)...
+
+ Matrix Multiplication:
+[3, 3, 3]
+[3, 3, 3]
+[3, 3, 3]
+Python (Threads=3), size=10 => 0.0005 sec
+Python (Threads=7), size=10 => 0.0008 sec
+Python (Threads=9), size=10 => 0.0007 sec
+Python (Threads=2), size=10 => 0.0003 sec
+Python (Threads=3), size=50 => 0.0087 sec
+Python (Threads=7), size=50 => 0.0097 sec
+Python (Threads=9), size=50 => 0.0096 sec
+Python (Threads=2), size=50 => 0.0081 sec
+Python (Threads=3), size=100 => 0.0635 sec
+Python (Threads=7), size=100 => 0.0685 sec
+Python (Threads=9), size=100 => 0.0715 sec
+Python (Threads=2), size=100 => 0.0694 sec
+Python (Threads=3), size=500 => 9.6808 sec
+Python (Threads=7), size=500 => 9.6970 sec
+Python (Threads=9), size=500 => 9.6207 sec
+Python (Threads=2), size=500 => 9.6909 sec
+Python (Threads=3), size=1000 => 83.5114 sec
+Python (Threads=7), size=1000 => 81.9703 sec
+Python (Threads=9), size=1000 => 81.3222 sec
+Python (Threads=2), size=1000 => 78.7261 sec
+Python (Threads=3), size=1200 => 146.4636 sec
+Python (Threads=7), size=1200 => 146.5770 sec
+Python (Threads=9), size=1200 => 146.5685 sec
+Python (Threads=2), size=1200 => 141.6101 sec
+Python (Threads=3), size=1500 => 284.6909 sec
+Python (Threads=7), size=1500 => 281.0589 sec
+Python (Threads=9), size=1500 => 278.4300 sec
+Python (Threads=2), size=1500 => 277.3393 sec
+
+Timing comparisons stored in timing_comparison.log
+Running Python tests (non-threaded version):
+
+Result Matrix:
+[3, 3, 3]
+[3, 3, 3]
+[3, 3, 3]
+Python (No Threads), size=10 => 0.0001 sec
+Python (No Threads), size=50 => 0.0094 sec
+Python (No Threads), size=100 => 0.0734 sec
+Python (No Threads), size=500 => 10.1868 sec
+Python (No Threads), size=1000 => 87.4654 sec
+Python (No Threads), size=1200 => 155.3050 sec
+Python (No Threads), size=1500 => 306.9436 sec
+Running Python tests (threaded version):
+
+ Matrix Multiplication:
+[3, 3, 3]
+[3, 3, 3]
+[3, 3, 3]
+Python (Threads=3), size=10 => 0.0008 sec
+Python (Threads=7), size=10 => 0.0007 sec
+Python (Threads=9), size=10 => 0.0005 sec
+Python (Threads=2), size=10 => 0.0002 sec
+Python (Threads=3), size=50 => 0.0088 sec
+Python (Threads=7), size=50 => 0.0088 sec
+Python (Threads=9), size=50 => 0.0081 sec
+Python (Threads=2), size=50 => 0.0076 sec
+Python (Threads=3), size=100 => 0.0671 sec
+Python (Threads=7), size=100 => 0.0677 sec
+Python (Threads=9), size=100 => 0.0683 sec
+Python (Threads=2), size=100 => 0.0593 sec
+Python (Threads=3), size=500 => 9.3878 sec
+Python (Threads=7), size=500 => 9.2320 sec
+Python (Threads=9), size=500 => 9.2574 sec
+Python (Threads=2), size=500 => 9.3514 sec
+Python (Threads=3), size=1000 => 78.7119 sec
+Python (Threads=7), size=1000 => 79.4290 sec
+Python (Threads=9), size=1000 => 78.2984 sec
+Python (Threads=2), size=1000 => 78.6905 sec
+Python (Threads=3), size=1200 => 142.2950 sec
+Python (Threads=7), size=1200 => 140.4097 sec
+Python (Threads=9), size=1200 => 139.3903 sec
+Python (Threads=2), size=1200 => 140.1620 sec
+Python (Threads=3), size=1500 => 280.2713 sec
+Python (Threads=7), size=1500 => 274.9027 sec
+Python (Threads=9), size=1500 => 273.0324 sec
+Python (Threads=2), size=1500 => 277.3778 sec
+Mon Apr 14 11:33:36 EDT 2025
